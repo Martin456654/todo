@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add New Task</ion-title>
+    <ion-icon name="close" slot="end" size="large" (click)="dismis()" class="ion-padding"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-textarea [(ngModel)]="taskName" placeholder="Write your task here"></ion-textarea>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Priority</ion-label>
+      <ion-select [(ngModel)]="taskPriority">
+        <ion-select-option value="Low">Low</ion-select-option>
+        <ion-select-option value="Middle">Middle</ion-select-option>
+        <ion-select-option value="High">High</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-item>
+        <ion-input [value]="dateValue2"></ion-input>
+
+        <ion-button fill="clear" id="open-date-input-2">
+          <ion-icon icon="calendar"></ion-icon>
+        </ion-button>
+
+        <ion-popover trigger="open-date-input-2" show-backdrop="false">
+          <ng-template>
+            <ion-datetime
+              #popoverDatetime2
+              presentation="date"
+              (ionChange)="dateValue2 = formatDate(popoverDatetime2.value)"
+            ></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+      <ion-label>Category</ion-label>
+      <span>{{ taskCategory }}</span>
+    </ion-item>
+
+    <ion-item>
+      <ion-chip *ngFor="let category of categories; let i = index" (click)="selectedCategory(i)">
+        {{ category }}
+      </ion-chip>
+    </ion-item>
+
+    <ion-button class="ion-margin" expand="block" (click)="AddTask()">Uložit</ion-button>
+  </ion-card>
+</ion-content>
